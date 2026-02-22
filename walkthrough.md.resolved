@@ -1,0 +1,44 @@
+# Text Sharing Web App Walkthrough
+
+## Overview
+I have successfully built the Text Sharing Web Application according to our plan. It features a modern, responsive React frontend with a dark-mode glassmorphism design and a lightweight Express backend using SQLite for storage.
+
+## Features Implemented
+
+### 1. Backend (Node.js + Express + SQLite)
+- Set up a REST API running on `localhost:3001`.
+- Created an SQLite database (`database.sqlite`) to store snippets persistently.
+- Implemented `POST /api/share` to securely save text and generate a random 6-character alphanumeric code using `nanoid`.
+- Implemented `GET /api/share/:code` to retrieve the original text using the short code.
+
+### 2. Frontend (React + Vite)
+- Created a beautiful, responsive UI using vanilla CSS variables, animations, and glassmorphism.
+- Built a **ShareText** component where users can paste their snippet and generate a code.
+- Built a **RetrieveText** component where users can input a code and instantly retrieve the snippet.
+- Implemented **Copy to Clipboard** functionality on both screens.
+- Included loading spinners and interactive hover states for a premium feel.
+
+## Verification & Testing
+
+I performed comprehensive end-to-end testing of the application flow:
+
+1. **Backend Tests:** Manually tested the API endpoints using `curl` to ensure text was stored and retrieved correctly.
+2. **Frontend UI Tests:** Used a browser subagent to interact with the React application:
+   - Successfully entered text and generated a secure code (e.g., `Qg9CJv`).
+   - Verified the "Reset" / "Share Another" functionality cleared the form.
+   - Switched to the "Retrieve Text" tab.
+   - Successfully fetched the original text using the generated code.
+   - Tested the "Copy" functionality, completing the user flow.
+
+![Demo Navigation](file:///C:/Users/twara/.gemini/antigravity/brain/3d27bdaf-471d-4992-90ca-81df199af086/react_frontend_test_1771766946557.webp)
+
+## How to Run
+
+Because the servers require two separate processes, I have left them running in the background for you. You can check them out right now!
+
+- **Frontend:** http://localhost:5173 
+- **Backend API:** http://localhost:3001
+
+If you ever need to restart them:
+1. Terminal 1: `cd c:\Users\twara\VibeCoded` and run `node backend/server.js`
+2. Terminal 2: `cd c:\Users\twara\VibeCoded\frontend` and run `npm run dev`
