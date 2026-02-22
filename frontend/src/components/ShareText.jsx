@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Share2, FileText, Check, Copy, RefreshCw, Hexagon } from 'lucide-react';
 
-const API_BASE = 'http://localhost:3001/api';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 
 function ShareText() {
     const [text, setText] = useState('');
