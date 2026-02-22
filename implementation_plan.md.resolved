@@ -1,0 +1,63 @@
+# Text Sharing App Implementation Plan
+
+## Goal Description
+Build a modern, responsive web application that allows users to share text snippets. A user can paste text, generate a unique short code, and share that code. Another user can enter the code to retrieve and copy the text. The application will feature a premium, dark-mode glassmorphism design.
+
+## Architecture
+
+**Frontend (React + Vite)**
+- Single-page application using React.
+- Styling with plain CSS using CSS Variables for theming (focused on dark mode, gradients, glass effects, and micro-animations).
+- State management using React Hooks.
+
+**Backend (Node.js + Express + SQLite)**
+- Lightweight REST API to handle text storage and retrieval.
+- SQLite database for simple, file-based persistent storage.
+- `nanoid` (or similar) to generate short, unique, user-friendly codes.
+
+## Proposed Changes
+
+### Backend Setup
+#### [NEW] backend/server.js
+Express server setup, static file serving (if needed), CORS configuration, and API routes.
+#### [NEW] backend/database.js
+SQLite initialization and helper functions (`saveText`, `getText`).
+#### [NEW] backend/package.json
+Dependencies: `express`, `sqlite3`, `cors`, `nanoid`.
+
+### Frontend Setup
+#### [NEW] frontend/package.json
+Vite + React dependencies.
+#### [NEW] frontend/src/App.jsx
+Main application component acting as the layout and state container. Will toggle between "Share" and "Retrieve" views or show both cleanly.
+#### [NEW] frontend/src/components/ShareText.jsx
+Component with a `<textarea>` for input and a "Generate Code" button.
+#### [NEW] frontend/src/components/RetrieveText.jsx
+Component with an `<input>` for the code, a "Fetch" button, and a display area for the retrieved text with a "Copy to Clipboard" button.
+#### [NEW] frontend/src/index.css
+Comprehensive CSS file containing the design system (variables, glassmorphism utilities, modern typography imports, and animations).
+
+## Verification Plan
+
+### Automated Tests
+*Currently, no automated tests are planned for this MVP to prioritize rapid development of the core feature and UI. We can add Jest/React Testing Library later if requested.*
+
+### Manual Verification
+1. **Start Backend:** Run `npm start` in the `backend` directory. Verify it runs on port 3001.
+2. **Start Frontend:** Run `npm run dev` in the `frontend` directory. Open the provided localhost URL in a browser.
+3. **UI Check:** Verify the design matches the "premium, dark-mode glassmorphism" requirements. Check hover states and animations.
+4. **Share Flow:**
+   - Enter a multi-line text snippet (e.g., some code) into the Share text area.
+   - Click "Generate Code".
+   - Verify a short code (e.g., 5-6 characters) is returned and displayed clearly.
+5. **Retrieve Flow:**
+   - Switch to or focus on the Retrieve section.
+   - Enter the generated code.
+   - Click "Fetch".
+   - Verify the exact original text appears.
+6. **Copy functionality:**
+   - Click the "Copy to Clipboard" button next to the retrieved text.
+   - Paste the clipboard contents somewhere else to verify it copied correctly.
+7. **Error Handling:**
+   - Enter an invalid/non-existent code and click "Fetch".
+   - Verify a user-friendly error message is displayed (e.g., "Code not found").
