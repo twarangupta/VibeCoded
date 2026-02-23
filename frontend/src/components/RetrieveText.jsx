@@ -61,7 +61,7 @@ function RetrieveText() {
                         placeholder="Enter short code here..."
                         disabled={loading}
                         maxLength={10}
-                        style={{ textTransform: 'uppercase', flex: 1 }}
+                        style={{ flex: 1 }}
                     />
                     <button className="btn btn-secondary" onClick={handleRetrieve} disabled={loading || !code.trim()}>
                         {loading ? <span className="loader"></span> : 'Fetch Text'}
